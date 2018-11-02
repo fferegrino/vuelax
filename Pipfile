@@ -1,0 +1,24 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+jupyter = "*"
+numpy = "*"
+scipy = "*"
+scikit-learn = "*"
+matplotlib = "*"
+nltk = "*"
+gensim = "*"
+"m16-mlutils" = "*"
+pandas = "*"
+
+[dev-packages]
+jupygit = "*"
+jupyter_contrib_nbextensions = "*"
+jupyter_nbextensions_configurator = "*"
+jupyterthemes = "*"
+
+[requires]
+python_version = "3.7"
