@@ -276,3 +276,6 @@ $RECYCLE.BIN/
 
 # Intermediate data files:
 data/i__*
+
+# jupygit file "extension"
+*-jupygit___.ipynb
