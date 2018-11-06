@@ -44,19 +44,34 @@ chunker.transform(['¡CUN a Holanda $8,885! Sin escala EE.UU'])
         tagged = self._tagger.tag(only_tokens)
         tags = [l[1] for l in tagged]
         lengths = [len(l) for l in only_tokens]
+        offer_len = [len(label) for l in only_tokens]
         n_tokens = [len(only_tokens) for l in only_tokens]
         augmented = ['<p>'] + tags + ['</p>']
         uppercase = [all([l.isupper() for l in token]) for token in only_tokens]
-        return only_tokens, positions, tags, augmented[:len(only_tokens)], augmented[2:], lengths, uppercase, n_tokens
+        return offer_len, only_tokens, positions, tags, augmented[:len(only_tokens)], augmented[
+                                                                                      2:], lengths, uppercase, n_tokens
 
     def fit(self, X, y=None):
         return self
 
     def transform(self, X):
-        tags = []
+        dictionaries = []
         for sentence in X:
-            tags.append(self.__process_label(sentence))
-        return tags
+            tags = self.__process_label(sentence)
+            dictionary = {
+                'offer_len': tags[0],
+                'token': tags[1],
+                'loc': tags[2],
+                'pos': tags[3],
+                'pos_left': tags[4],
+                'pos_right': tags[5],
+                'token_len': tags[6],
+                'all_upper': tags[7],
+                'n_tokens': tags[8]
+            }
+            dictionaries.append(pd.DataFrame(dictionary))
+        df = pd.concat(dictionaries)
+        return df
 
 
 class IsPunctuation(BaseEstimator, TransformerMixin):
