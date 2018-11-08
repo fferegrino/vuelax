@@ -33,9 +33,6 @@ jobs:
       - save_cache:
           paths:
             - ".venv"
-            - "/usr/local/bin"
-            - "/usr/local/lib/python3.6/site-packages"
-            - "./tagger"
           key: v1-dependencies-{{ checksum "Pipfile.lock" }}-{{ checksum "make.sh" }}
 
 workflows:
