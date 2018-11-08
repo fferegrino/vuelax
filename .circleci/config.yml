@@ -23,7 +23,7 @@ jobs:
       - run:
           name: install dependencies
           command: |
-            make download_tagger
+            ./make.sh
             pipenv install
 
       - save_cache:
