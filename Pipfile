@@ -4,19 +4,19 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-jupyter = "*"
 numpy = "*"
 scipy = "*"
 scikit-learn = "*"
-matplotlib = "*"
 nltk = "*"
 gensim = "*"
 "m16-mlutils" = "*"
 pandas = "*"
-tqdm = "*"
 
 [dev-packages]
 jupygit = "*"
+matplotlib = "*"
+tqdm = "*"
+jupyter = "*"
 jupyter_contrib_nbextensions = "*"
 jupyter_nbextensions_configurator = "*"
 jupyterthemes = "*"

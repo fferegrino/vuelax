@@ -22,6 +22,7 @@ jobs:
           name: install dependencies
           command: |
             make download_tagger
+            pipenv install
 
       - save_cache:
           paths:
