@@ -28,7 +28,7 @@ jobs:
             ./make.sh execute
 
       - store_artifacts:
-          path: /models/features_pipeline.joblib
+          path: models/features_pipeline.joblib
 
       - save_cache:
           paths:
