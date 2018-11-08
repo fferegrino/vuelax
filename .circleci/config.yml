@@ -21,10 +21,15 @@ jobs:
           - v1-dependencies-{{ checksum "Pipfile.lock" }}-{{ checksum "make.sh" }}
 
       - run:
-          name: install dependencies
+          name: Execute
           command: |
-            ./make.sh
             pipenv install
+            ./make.sh download_tagger
+            ./make.sh download_data
+            ./make.sh execute
+
+      - store_artifacts:
+          path: /models/features_pipeline.joblib
 
       - save_cache:
           paths:
