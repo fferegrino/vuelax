@@ -24,8 +24,7 @@ jobs:
           name: Execute
           command: |
             pipenv install
-            ./make.sh download_tagger
-            ./make.sh download_data
+            ./make.sh setup
             ./make.sh execute
 
       - store_artifacts:
