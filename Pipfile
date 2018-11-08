@@ -11,6 +11,7 @@ nltk = "*"
 gensim = "*"
 "m16-mlutils" = "*"
 pandas = "*"
+kaggle = "*"
 
 [dev-packages]
 jupygit = "*"

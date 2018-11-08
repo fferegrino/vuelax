@@ -18,7 +18,7 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "Pipfile.lock" }}-{{ checksum "Makefile" }}
+          - v1-dependencies-{{ checksum "Pipfile.lock" }}-{{ checksum "make.sh" }}
 
       - run:
           name: install dependencies
@@ -32,7 +32,7 @@ jobs:
             - "/usr/local/bin"
             - "/usr/local/lib/python3.6/site-packages"
             - "./tagger"
-          key: v1-dependencies-{{ checksum "Pipfile.lock" }}-{{ checksum "Makefile" }}
+          key: v1-dependencies-{{ checksum "Pipfile.lock" }}-{{ checksum "make.sh" }}
 
 workflows:
   version: 2
