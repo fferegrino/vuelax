@@ -7,6 +7,8 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.6.4
+        environment:
+          PIPENV_VENV_IN_PROJECT: true
 
     working_directory: ~/repo
 
@@ -26,7 +28,10 @@ jobs:
 
       - save_cache:
           paths:
-            - ./tagger
+            - ".venv"
+            - "/usr/local/bin"
+            - "/usr/local/lib/python3.6/site-packages"
+            - "./tagger"
           key: v1-dependencies-{{ checksum "Pipfile.lock" }}-{{ checksum "Makefile" }}
 
 workflows:
