@@ -25,16 +25,11 @@ setup ()
 {
     download_data
     download_tagger
-    
+
     if [ ! -d models ]
     then
         mkdir models
     fi
-}
-
-execute ()
-{
-    pipenv run python feature_extraction.py
 }
 
 "$@"
