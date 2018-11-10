@@ -25,7 +25,7 @@ jobs:
           command: |
             pipenv install --dev
             ./make.sh setup
-            PYTHONPATH=src
+            export PYTHONPATH=src
             pipenv run pytest test
             pipenv run python feature_extraction.py
 
