@@ -30,11 +30,16 @@ jobs:
             pipenv run pytest test
 
       - store_artifacts:
-          paths:
-            - "models/features_pipeline.joblib"
-            - "models/classify_pipeline.joblib"
-            - metrics.json
-            - summary.txt
+          path: "models/features_pipeline.joblib"
+
+      - store_artifacts:
+          path: "models/classify_pipeline.joblib"
+
+      - store_artifacts:
+          path: metrics.json
+          
+      - store_artifacts:
+          path: summary.txt
 
       - save_cache:
           paths:
