@@ -26,7 +26,7 @@ jobs:
             pipenv install --dev
             ./make.sh setup
             export PYTHONPATH=src
-            pipenv run python classify.py
+            pipenv run python src/classify.py
             pipenv run pytest test
 
       - store_artifacts:
@@ -37,7 +37,7 @@ jobs:
 
       - store_artifacts:
           path: metrics.json
-          
+
       - store_artifacts:
           path: summary.txt
 
