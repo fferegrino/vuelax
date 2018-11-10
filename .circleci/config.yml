@@ -25,7 +25,9 @@ jobs:
           command: |
             pipenv install
             ./make.sh setup
-            ./make.sh execute
+            PYTHONPATH=src
+            pipenv run pytest test
+            pipenv run python feature_extraction.py
 
       - store_artifacts:
           path: "models/features_pipeline.joblib"
