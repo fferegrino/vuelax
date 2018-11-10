@@ -1,0 +1,47 @@
+# Python CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-python/ for more details
+#
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.6.4
+        environment:
+          PIPENV_VENV_IN_PROJECT: true
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "Pipfile.lock" }}-{{ checksum "make.sh" }}
+
+      - run:
+          name: Execute
+          command: |
+            pipenv install --dev
+            ./make.sh setup
+            export PYTHONPATH=src
+            pipenv run pytest test
+            pipenv run python feature_extraction.py
+
+      - store_artifacts:
+          path: "models/features_pipeline.joblib"
+
+      - save_cache:
+          paths:
+            - ".venv"
+          key: v1-dependencies-{{ checksum "Pipfile.lock" }}-{{ checksum "make.sh" }}
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /.*/
