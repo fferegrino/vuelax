@@ -8,7 +8,10 @@ def create_trip(tokens, predicted_labels):
         elif label == 'd':
             destination_tokens.append(token)
         elif label == 'p':
-            price = float(token.replace(',', ''))
+            try:
+                price = float(token.replace(',', ''))
+            except ValueError:
+                pass
     return {
         'origin': ' '.join(origin_tokens),
         'destination': ' '.join(destination_tokens),

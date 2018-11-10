@@ -19,7 +19,7 @@ l2 = ['n', 'o', 'o', 'o', 's', 'd', 'n']
 res2 = create_response('CDMX , MTY', 'Japón', -1)
 
 t3 = ['¡', 'CDMX', ',', 'MTY', 'a', 'Japón', '$']
-l3 = ['n', 'o', 'o', 'o', 's', 'd', 'd']
+l3 = ['n', 'o', 'o', 'o', 's', 'd', 'p']
 res3 = create_response('CDMX , MTY', 'Japón', -1)
 
 
