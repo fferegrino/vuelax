@@ -23,7 +23,7 @@ jobs:
       - run:
           name: Execute
           command: |
-            pipenv install
+            pipenv install --dev
             ./make.sh setup
             PYTHONPATH=src
             pipenv run pytest test
