@@ -12,11 +12,7 @@ seed(42)
 
 
 def load_data():
-    training_set = pd.read_csv('data/i__training_data.csv',
-                               header=None, index_col=None,
-                               names=['sentence_id', 'offer_len', 'token', 'loc',
-                                      'pos', 'pos_left', 'pos_right',
-                                      'token_len', 'all_upper', 'n_tokens', 'real_label'])
+    training_set = pd.read_csv('data/i__training_data.csv', index_col=None)
 
     training_set = training_set[~pd.isna(training_set['real_label'])]
 
@@ -41,8 +37,6 @@ def train_eval_algorithm(dump_to_disk=False):
 
     metrics, summary, cm = eval_summary(y_test, y_pred)
 
-
-
     if dump_to_disk:
         joblib.dump(pipeline, 'models/classify_pipeline.joblib')
 
@@ -50,7 +44,6 @@ def train_eval_algorithm(dump_to_disk=False):
 
 
 if __name__ == '__main__':
-
     metrics, summary, cm = train_eval_algorithm(True)
 
     with open('metrics.json', 'w') as w:
