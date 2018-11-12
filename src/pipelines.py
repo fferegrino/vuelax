@@ -1,19 +1,17 @@
-import pandas as pd
-import numpy as np
 import string
-from sklearn.base import BaseEstimator, TransformerMixin
+
+import numpy as np
+import pandas as pd
+from m16_mlutils.pipeline import CategoryEncoder, DataFrameSelector
 from nltk.tag.stanford import StanfordPOSTagger
 from nltk.tokenize import TweetTokenizer
+from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.externals import joblib
+from sklearn.pipeline import Pipeline, FeatureUnion
+from sklearn.preprocessing import MaxAbsScaler
 
 
 class SentenceChunker(BaseEstimator, TransformerMixin):
-    """
-chunker = SentenceChunker(HOME + '/stanford_nlp/stanford-postagger-full-2018-02-27/models/spanish-distsim.tagger',
-                HOME + '/stanford_nlp/stanford-postagger-full-2018-02-27/stanford-postagger.jar')
-
-chunker.fit(['¡CUN a Holanda $8,885! Sin escala EE.UU'])
-chunker.transform(['¡CUN a Holanda $8,885! Sin escala EE.UU'])
-    """
     __TOKENIZER = TweetTokenizer()
 
     @staticmethod
@@ -108,3 +106,46 @@ class Reshaper(BaseEstimator, TransformerMixin):
 
     def transform(self, X):
         return X.values.reshape(-1, 1)
+
+
+def create_pipeline(dump_to_disk=False):
+    pipeline_token_pos = Pipeline([
+        ('selector', DataFrameSelector(['pos'])),
+        ('encoder', CategoryEncoder())
+    ])
+
+    pipeline_is_punctuation = Pipeline([
+        ('selector', DataFrameSelector(['token'])),
+        ('is_punct', IsPunctuation())
+    ])
+
+    pipeline_relative_location = Pipeline([
+        ('location', RelativeLocations())
+    ])
+
+    pipeline_token_length = Pipeline([
+        ('selector', DataFrameSelector(['offer_len', 'token_len'])),
+        ('scaler', MaxAbsScaler())
+    ])
+
+    pipeline_unmodified = Pipeline([
+        ('select', DataFrameSelector('all_upper')),
+        ('reshape', Reshaper())
+    ])
+
+    joint_pipeline = Pipeline([
+        ('get_features', FeatureUnion([
+            ('token_pos', pipeline_token_pos),
+            ('punctuation', pipeline_is_punctuation),
+            ('rel_loc', pipeline_relative_location),
+            ('token_length', pipeline_token_length),
+            ('original_features', pipeline_unmodified)
+        ]))
+    ])
+
+    if dump_to_disk:
+        joblib.dump(joint_pipeline, 'models/features_pipeline.joblib')
+
+    return joint_pipeline
+
+

@@ -26,11 +26,20 @@ jobs:
             pipenv install --dev
             ./make.sh setup
             export PYTHONPATH=src
+            pipenv run python src/classify.py
             pipenv run pytest test
-            pipenv run python feature_extraction.py
 
       - store_artifacts:
           path: "models/features_pipeline.joblib"
+
+      - store_artifacts:
+          path: "models/classify_pipeline.joblib"
+
+      - store_artifacts:
+          path: metrics.json
+
+      - store_artifacts:
+          path: summary.txt
 
       - save_cache:
           paths:
