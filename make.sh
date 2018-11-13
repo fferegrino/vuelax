@@ -9,21 +9,8 @@ download_tagger ()
     fi
 }
 
-download_data ()
-{
-    if [ ! -d data ]
-    then
-        mkdir data
-        pipenv run kaggle datasets download -p data -d ioexception/vuelax
-        unzip data/vuelax.zip -d data
-        chmod 666 data/i__training_data.csv
-        chmod 666 data/vuelos.csv
-    fi
-}
-
 setup ()
 {
-    download_data
     download_tagger
 
     if [ ! -d models ]
