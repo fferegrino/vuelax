@@ -14,6 +14,7 @@ pandas = "*"
 kaggle = "*"
 
 [dev-packages]
+invoke = "*"
 jupygit = "*"
 matplotlib = "*"
 tqdm = "*"

@@ -147,5 +147,3 @@ def create_pipeline(dump_to_disk=False):
         joblib.dump(joint_pipeline, 'models/features_pipeline.joblib')
 
     return joint_pipeline
-
-
