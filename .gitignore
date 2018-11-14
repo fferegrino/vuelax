@@ -280,6 +280,9 @@ data/i__*
 # Models
 models/*
 
+# Models
+tagger/*
+
 # Idea
 .idea/*
 

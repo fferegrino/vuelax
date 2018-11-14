@@ -7,12 +7,13 @@ from sklearn.model_selection import train_test_split
 from pipelines import create_pipeline
 import json
 from pipelines import IsPunctuation, RelativeLocations, Reshaper, SentenceChunker
+from dataset import load_training_data
 
 seed(42)
 
 
 def load_data():
-    training_set = pd.read_csv('data/i__training_data.csv', index_col=None)
+    training_set = load_training_data()
 
     training_set = training_set[~pd.isna(training_set['real_label'])]
 

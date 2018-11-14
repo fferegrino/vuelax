@@ -9,27 +9,27 @@ download_tagger ()
     fi
 }
 
-download_data ()
-{
-    if [ ! -d data ]
-    then
-        mkdir data
-        pipenv run kaggle datasets download -p data -d ioexception/vuelax
-        unzip data/vuelax.zip -d data
-        chmod 666 data/i__training_data.csv
-        chmod 666 data/vuelos.csv
-    fi
-}
-
 setup ()
 {
-    download_data
     download_tagger
 
     if [ ! -d models ]
     then
         mkdir models
     fi
+}
+
+upload_kaggle ()
+{
+    mkdir data/kaggle
+    kaggle datasets metadata -p ./ ioexception/vuelax
+    mv dataset-metadata.json data/kaggle
+    cp data/vuelos.csv data/kaggle
+    export PYTHONPATH=src
+    pipenv run invoke prepare-kaggle-data --path data/kaggle
+    pipenv run invoke prepare-kaggle-metadata --meta-file data/kaggle/dataset-metadata.json
+    kaggle datasets version -p data/kaggle -m "Updated data"
+    rm -rf data/kaggle
 }
 
 "$@"
