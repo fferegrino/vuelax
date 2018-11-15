@@ -107,9 +107,9 @@ TRAINING_DATA_FIELDS = [
 
 
 def __upper_boolean(value):
-    if value == 'TRUE':
+    if value.lower() == 'true':
         return True
-    elif value == 'FALSE':
+    elif value.lower() == 'false':
         return False
 
 
