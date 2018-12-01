@@ -12,6 +12,7 @@ gensim = "*"
 "m16-mlutils" = "*"
 pandas = "*"
 kaggle = "*"
+python-crfsuite = "*"
 
 [dev-packages]
 invoke = "*"

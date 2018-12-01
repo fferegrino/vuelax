@@ -113,7 +113,7 @@ def __upper_boolean(value):
         return False
 
 
-def load_training_data():
+def load_training_data(drop_no_label=True):
     offer_files = sorted(glob('data/offers-*.csv'))
     headers = None
     records = []
@@ -127,6 +127,8 @@ def load_training_data():
     frame = pd.DataFrame(records, columns=headers).astype(DTYPES).set_index('offer_id')
     frame['all_upper'] = frame['all_upper'].apply(__upper_boolean)
     frame['real_label'] = frame['real_label'].replace('', np.nan)
+    if drop_no_label:
+        frame = frame.dropna(subset=['real_label']).copy()
 
     return frame
 
