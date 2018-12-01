@@ -121,7 +121,7 @@
 8,25,Bogotá,8,np00000,sp000,dn0000,6,FALSE,8,d
 8,25,🇨🇴,15,dn0000,np00000,zm,2,FALSE,8,f
 8,25,$,18,zm,dn0000,z0,1,FALSE,8,n
-8,25,"4,659",19,z0,zm,fat,5,FALSE,8,d
+8,25,"4,659",19,z0,zm,fat,5,FALSE,8,p
 8,25,!,24,fat,z0,</p>,1,FALSE,8,n
 9,31,¡,0,faa,<p>,np00000,1,FALSE,8,n
 9,31,NYC,1,np00000,faa,sp000,3,TRUE,8,o
@@ -231,12 +231,12 @@
 15,82,Tokio,26,np00000,sp000,dn0000,5,FALSE,22,n
 15,82,🇯🇵,32,dn0000,np00000,zm,2,FALSE,22,f
 15,82,$,35,zm,dn0000,dn0000,1,FALSE,22,n
-15,82,"8,607",36,dn0000,zm,fat,5,FALSE,22,n
+15,82,"8,607",36,dn0000,zm,fat,5,FALSE,22,p
 15,82,!,41,fat,dn0000,np00000,1,FALSE,22,n
 15,82,(,43,np00000,fat,sp000,1,FALSE,22,n
 15,82,Por,44,sp000,np00000,nc0p000,3,FALSE,22,n
 15,82,$,35,nc0p000,sp000,z0,1,FALSE,22,n
-15,82,"3,147",49,z0,nc0p000,vmip000,5,FALSE,22,p
+15,82,"3,147",49,z0,nc0p000,vmip000,5,FALSE,22,n
 15,82,agrega,55,vmip000,z0,dn0000,6,FALSE,22,n
 15,82,11,62,dn0000,vmip000,nc0p000,2,FALSE,22,n
 15,82,noches,65,nc0p000,dn0000,sp000,6,FALSE,22,n
@@ -267,7 +267,7 @@
 17,94,¡,0,faa,<p>,np00000,1,FALSE,22,n
 17,94,CDMX,1,np00000,faa,sp000,4,TRUE,22,o
 17,94,a,6,sp000,np00000,np00000,1,FALSE,22,s
-17,94,Tailandia,8,np00000,sp000,zm,9,FALSE,22,o
+17,94,Tailandia,8,np00000,sp000,zm,9,FALSE,22,d
 17,94,$,18,zm,np00000,dn0000,1,FALSE,22,n
 17,94,"10,268",19,dn0000,zm,fat,6,FALSE,22,p
 17,94,!,25,fat,dn0000,sp000,1,FALSE,22,n
@@ -2287,7 +2287,7 @@
 120,56,Amsterdam,36,np00000,sp000,fg,9,FALSE,13,n
 120,56,–,46,fg,np00000,zm,1,FALSE,13,n
 120,56,$,48,zm,fg,dn0000,1,FALSE,13,n
-120,56,"11,976",49,dn0000,zm,fat,6,FALSE,13,n
+120,56,"11,976",49,dn0000,zm,fat,6,FALSE,13,p
 120,56,!,55,fat,dn0000,</p>,1,FALSE,13,n
 121,89,¡,0,faa,<p>,di0000,1,FALSE,22,n
 121,89,Todo,1,di0000,faa,np00000,4,FALSE,22,o
@@ -2928,7 +2928,7 @@
 154,82,regresa,12,vmip000,fc,sp000,7,FALSE,22,n
 154,82,desde,20,sp000,vmip000,np00000,5,FALSE,22,n
 154,82,Tokio,26,np00000,sp000,dn0000,5,FALSE,22,n
-154,82,🇯🇵,32,dn0000,np00000,zm,2,FALSE,22,d
+154,82,🇯🇵,32,dn0000,np00000,zm,2,FALSE,22,f
 154,82,$,35,zm,dn0000,dn0000,1,FALSE,22,n
 154,82,"8,666",36,dn0000,zm,fat,5,FALSE,22,p
 154,82,!,41,fat,dn0000,np00000,1,FALSE,22,n
@@ -3401,7 +3401,7 @@
 179,80,Amsterdam,7,np00000,sp000,dn0000,9,FALSE,20,d
 179,80,🇳🇱,17,dn0000,np00000,zm,2,FALSE,20,f
 179,80,$,20,zm,dn0000,dn0000,1,FALSE,20,n
-179,80,"9,550",21,dn0000,zm,fat,5,FALSE,20,n
+179,80,"9,550",21,dn0000,zm,fat,5,FALSE,20,p
 179,80,!,26,fat,dn0000,np00000,1,FALSE,20,n
 179,80,(,28,np00000,fat,sp000,1,FALSE,20,n
 179,80,Por,29,sp000,np00000,nc0p000,3,FALSE,20,n
