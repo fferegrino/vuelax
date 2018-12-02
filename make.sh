@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+
+IN_PIPENV="pipenv run"
+
 download_tagger ()
 {
     if [ ! -d tagger ]
@@ -30,6 +33,12 @@ upload_kaggle ()
     pipenv run invoke prepare-kaggle-metadata --meta-file data/kaggle/dataset-metadata.json
     kaggle datasets version -p data/kaggle -m "Updated data"
     rm -rf data/kaggle
+}
+
+start ()
+{
+    export PYTHONPATH=src
+    $IN_PIPENV jupyter notebook
 }
 
 "$@"
