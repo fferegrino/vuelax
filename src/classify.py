@@ -1,12 +1,10 @@
 import pandas as pd
 from m16_mlutils.datatools.evaluation import eval_summary
-from numpy.random import seed
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.externals import joblib
 from sklearn.model_selection import train_test_split
 from pipelines import create_pipeline
 import json
-from pipelines import IsPunctuation, RelativeLocations, Reshaper, SentenceChunker
 from dataset import load_training_data
 
 
