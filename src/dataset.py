@@ -1,10 +1,8 @@
 from glob import glob
 import csv
-from collections import namedtuple
 import json
 import pandas as pd
 import numpy as np
-from src.features import is_punctuation, is_numeric
 
 DTYPES = {
     'offer_id': np.int64,
@@ -133,7 +131,6 @@ def load_training_data(drop_no_label=True):
         frame = frame.dropna(subset=['real_label']).copy()
 
     return frame
-
 
 
 def modify_metadata(metadata_file):
