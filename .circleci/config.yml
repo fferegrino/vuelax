@@ -30,10 +30,7 @@ jobs:
             pipenv run pytest test
 
       - store_artifacts:
-          path: "models/features_pipeline.joblib"
-
-      - store_artifacts:
-          path: "models/classify_pipeline.joblib"
+          path: "models/vuelax.crf"
 
       - store_artifacts:
           path: metrics.json

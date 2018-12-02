@@ -1,9 +1,10 @@
 import pandas as pd
+import pycrfsuite
 from m16_mlutils.datatools.evaluation import eval_summary
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.externals import joblib
 from sklearn.model_selection import train_test_split
-from pipelines import create_pipeline
+
+from extractor import get_labels, get_features
+from features import row_to_tokenfeatures
 import json
 from dataset import load_training_data
 
@@ -18,24 +19,56 @@ def load_data():
 
 def train_eval_algorithm(dump_to_disk=False):
     training_set = load_data()
-    pipeline = create_pipeline(True)
 
-    best_classifier = RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
-                                             max_depth=None, max_features='auto', max_leaf_nodes=None,
-                                             min_impurity_decrease=0.0, min_impurity_split=None,
-                                             min_samples_leaf=1, min_samples_split=2,
-                                             min_weight_fraction_leaf=0.0, n_estimators=10, n_jobs=None,
-                                             oob_score=False, random_state=42, verbose=0, warm_start=False)
-    X_train, X_test, y_train, y_test = train_test_split(training_set, training_set['real_label'])
-    pipeline.steps.append(('clf', best_classifier))
+    documents = []
+    current_doc = []
+    prev = -1
+    for i, word in training_set.iterrows():
+        if i != prev:
+            if current_doc:
+                documents.append(current_doc)
+            current_doc = []
+        current_doc.append(row_to_tokenfeatures(word))
+        prev = i
 
-    pipeline.fit(X_train, y_train)
-    y_pred = pipeline.predict(X_test)
+    if current_doc:
+        documents.append(current_doc)
 
-    metrics, summary, cm = eval_summary(y_test, y_pred)
+    train_docs, test_docs = train_test_split(documents)
 
-    if dump_to_disk:
-        joblib.dump(pipeline, 'models/classify_pipeline.joblib')
+    y_train = [get_labels(s) for s in train_docs]
+    X_train = [get_features(s) for s in train_docs]
+
+    y_test = [get_labels(s) for s in test_docs]
+    X_test = [get_features(s) for s in test_docs]
+
+    y_test_flat = [item for sublist in y_test for item in sublist]
+    y_pred_flat = []
+
+    trainer = pycrfsuite.Trainer(verbose=False)
+
+    for xseq, yseq in zip(X_train, y_train):
+        trainer.append(xseq, yseq)
+
+    trainer.set_params({
+        'c1': 1.0,  # coefficient for L1 penalty
+        'c2': 1e-3,  # coefficient for L2 penalty
+        'max_iterations': 50,  # stop earlier
+
+        # include transitions that are possible, but not observed
+        'feature.possible_transitions': True
+    })
+
+    trainer.train('models/vuelax.crf')
+
+    crf_tagger = pycrfsuite.Tagger()
+    crf_tagger.open('models/vuelax.crf')
+
+    for doc in X_test:
+        predicted = crf_tagger.tag(doc)
+        y_pred_flat.extend(predicted)
+
+    metrics, summary, cm = eval_summary(y_test_flat, y_pred_flat)
 
     return metrics, summary, cm
 
