@@ -1,9 +1,8 @@
-
-        
 from nltk.tokenize import TweetTokenizer
 import string
 
 tokenizer = TweetTokenizer()
+
 
 def index_emoji_tokenize(sentence, return_flags=False):
     i = 0
@@ -22,10 +21,13 @@ def index_emoji_tokenize(sentence, return_flags=False):
             yield t, ix
         ix = +1
 
+
 punctuation = set(string.punctuation)
+
 
 def is_punctuation(token):
     return token in punctuation
+
 
 def is_numeric(token):
     try:

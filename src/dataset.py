@@ -15,7 +15,7 @@ DTYPES = {
     'pos_left': str,
     'pos_right': str,
     'token_len': np.int64,
-    #'all_upper':       bool,
+    # 'all_upper':       bool,
     'token_len': np.int64,
     'n_tokens': np.int64,
     'real_label': str,
@@ -114,6 +114,7 @@ def __upper_boolean(value):
     elif value.lower() == 'false':
         return False
 
+
 def load_training_data(drop_no_label=True):
     offer_files = sorted(glob('data/offers-*.csv'))
     headers = None
@@ -133,7 +134,8 @@ def load_training_data(drop_no_label=True):
 
     return frame
 
-TokenFeatures = namedtuple('TokenFeatures', 
+
+TokenFeatures = namedtuple('TokenFeatures',
                            ['sentence_id',
                             'offer_length',
                             'token',
@@ -147,24 +149,27 @@ TokenFeatures = namedtuple('TokenFeatures',
                             'is_numeric',
                             'is_punctuation',
                             'label'
-                           ])
+                            ])
+
 
 def row_to_tokenfeatures(row):
     sentence_id = int(row.name)
     word_dictionary = row.to_dict()
     word_dictionary['sentence_id'] = sentence_id
-    return TokenFeatures(sentence_id, word_dictionary['offer_len'], 
-                     word_dictionary['token'], 
-                                     word_dictionary['loc'], 
-                                     word_dictionary['pos'], 
-                                     word_dictionary['pos_left'], 
-                                     word_dictionary['pos_right'], 
-                                     word_dictionary['token_len'], 
-                                     word_dictionary['all_upper'], 
-                                     word_dictionary['n_tokens'], 
-                                     is_numeric(word_dictionary['token']), 
-                                     is_punctuation(word_dictionary['token']),
-                                     word_dictionary['real_label'])
+    return TokenFeatures(sentence_id,
+                         word_dictionary['offer_len'],
+                         word_dictionary['token'],
+                         word_dictionary['loc'],
+                         word_dictionary['pos'],
+                         word_dictionary['pos_left'],
+                         word_dictionary['pos_right'],
+                         word_dictionary['token_len'],
+                         word_dictionary['all_upper'],
+                         word_dictionary['n_tokens'],
+                         is_numeric(word_dictionary['token']),
+                         is_punctuation(word_dictionary['token']),
+                         word_dictionary['real_label'])
+
 
 def modify_metadata(metadata_file):
     with open(metadata_file, 'r') as r:

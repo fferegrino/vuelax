@@ -9,8 +9,6 @@ import json
 from pipelines import IsPunctuation, RelativeLocations, Reshaper, SentenceChunker
 from dataset import load_training_data
 
-seed(42)
-
 
 def load_data():
     training_set = load_training_data()
