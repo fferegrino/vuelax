@@ -25,13 +25,13 @@ setup ()
 upload_kaggle ()
 {
     mkdir data/kaggle
-    kaggle datasets metadata -p ./ ioexception/vuelax
+    $IN_PIPENV kaggle datasets metadata -p ./ ioexception/vuelax
     mv dataset-metadata.json data/kaggle
     cp data/vuelos.csv data/kaggle
     export PYTHONPATH=src
-    pipenv run invoke prepare-kaggle-data --path data/kaggle
-    pipenv run invoke prepare-kaggle-metadata --meta-file data/kaggle/dataset-metadata.json
-    kaggle datasets version -p data/kaggle -m "Updated data"
+    $IN_PIPENV invoke prepare-kaggle-data --path data/kaggle
+    $IN_PIPENV invoke prepare-kaggle-metadata --meta-file data/kaggle/dataset-metadata.json
+    $IN_PIPENV kaggle datasets version -p data/kaggle -m "Updated data"
     rm -rf data/kaggle
 }
 
