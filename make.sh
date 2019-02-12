@@ -35,6 +35,18 @@ upload_kaggle ()
     rm -rf data/kaggle
 }
 
+generate_dataset ()
+{
+
+    if [ ! -d input_data ]
+    then
+        mkdir input_data
+    fi
+
+    export PYTHONPATH=src
+    $IN_PIPENV invoke prepare-kaggle-data --path data --file vuelax.csv
+}
+
 start ()
 {
     export PYTHONPATH=src

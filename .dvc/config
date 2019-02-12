@@ -1,0 +1,4 @@
+['remote "data/"']
+url = /Users/antonioferegrino/dvc/vuelax/data/
+[core]
+remote = data/
