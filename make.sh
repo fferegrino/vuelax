@@ -24,7 +24,7 @@ setup ()
 
 prepare_dvc ()
 {
-    $IN_PIPENV invoke prepare-kaggle-data --path data/raw --file vuelax.csv
+    $IN_PIPENV invoke merge-data --path data/raw --file vuelax.csv
 }
 
 upload_kaggle ()
@@ -33,16 +33,18 @@ upload_kaggle ()
     $IN_PIPENV kaggle datasets metadata -p ./ ioexception/vuelax
     mv dataset-metadata.json data/interim/kaggle
     cp data/raw/vuelos.csv data/interim/kaggle
-    export PYTHONPATH=src
-    $IN_PIPENV invoke prepare-kaggle-data --path data/interim/kaggle
+    export EXPERIMENT_ROOT=$PWD
+    export PYTHONPATH=$PWD/src
+    $IN_PIPENV invoke merge-data --path data/interim/kaggle
     $IN_PIPENV invoke prepare-kaggle-metadata --meta-file data/interim/kaggle/dataset-metadata.json
-    #$IN_PIPENV kaggle datasets version -p data/interim/kaggle -m "Updated data"
+    $IN_PIPENV kaggle datasets version -p data/interim/kaggle -m "Updated data"
     rm -rf data/interim/kaggle
 }
 
 start ()
 {
-    export PYTHONPATH=src
+    export EXPERIMENT_ROOT=$PWD
+    export PYTHONPATH=$PWD/src
     $IN_PIPENV jupyter notebook
 }
 

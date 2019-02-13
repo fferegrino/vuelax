@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 from extractor import get_labels, get_features
 from features import row_to_tokenfeatures
 import json
-from dataset import load_training_data
+from data.dataset import load_training_data
 
 
 def load_data():

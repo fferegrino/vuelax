@@ -1,11 +1,11 @@
 from invoke import task
 
-from src.dataset import load_training_data, modify_metadata
+from data.dataset import load_training_data, modify_metadata
 import os
 
 
 @task
-def prepare_kaggle_data(c, path='.', file='i__training_data.csv'):
+def merge_data(c, path='.', file='i__training_data.csv'):
     output_file = os.path.join(path, file)
     print(output_file)
     i__training_data = load_training_data()

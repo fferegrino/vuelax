@@ -1,8 +1,11 @@
-from glob import glob
 import csv
 import json
-import pandas as pd
+from glob import glob
+
 import numpy as np
+import pandas as pd
+
+from tools import get_data_file
 
 DTYPES = {
     'offer_id': np.int64,
@@ -114,7 +117,7 @@ def __upper_boolean(value):
 
 
 def load_training_data(drop_no_label=True):
-    offer_files = sorted(glob('data/raw/offers-*.csv'))
+    offer_files = sorted(glob(get_data_file('raw', 'offers-*.csv')))
     headers = None
     records = []
     for offer_file in offer_files:
