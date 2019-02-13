@@ -4,11 +4,11 @@ IN_PIPENV="pipenv run"
 
 download_tagger ()
 {
-    if [ ! -d tagger ]
+    if [ ! -d bin ]
     then
-        mkdir tagger
-        wget -O tagger/spanish.tagger https://github.com/fferegrino/vuelax/releases/download/0.1.0-circleci/spanish-distsim.tagger
-        wget -O tagger/stanford-postagger.jar https://github.com/fferegrino/vuelax/releases/download/0.1.0-circleci/stanford-postagger.jar
+        mkdir bin
+        wget -O bin/spanish.tagger https://github.com/fferegrino/vuelax/releases/download/0.1.0-circleci/spanish-distsim.tagger
+        wget -O bin/stanford-postagger.jar https://github.com/fferegrino/vuelax/releases/download/0.1.0-circleci/stanford-postagger.jar
     fi
 }
 
@@ -16,23 +16,23 @@ setup ()
 {
     download_tagger
 
-    if [ ! -d models ]
+    if [ ! -d bin ]
     then
-        mkdir models
+        mkdir bin
     fi
 }
 
 upload_kaggle ()
 {
-    mkdir data/kaggle
+    mkdir data/interim/kaggle
     $IN_PIPENV kaggle datasets metadata -p ./ ioexception/vuelax
-    mv dataset-metadata.json data/kaggle
-    cp data/vuelos.csv data/kaggle
+    mv dataset-metadata.json data/interim/kaggle
+    cp data/raw/vuelos.csv data/interim/kaggle
     export PYTHONPATH=src
-    $IN_PIPENV invoke prepare-kaggle-data --path data/kaggle
-    $IN_PIPENV invoke prepare-kaggle-metadata --meta-file data/kaggle/dataset-metadata.json
-    $IN_PIPENV kaggle datasets version -p data/kaggle -m "Updated data"
-    rm -rf data/kaggle
+    $IN_PIPENV invoke prepare-kaggle-data --path data/interim/kaggle
+    $IN_PIPENV invoke prepare-kaggle-metadata --meta-file data/interim/kaggle/dataset-metadata.json
+    #$IN_PIPENV kaggle datasets version -p data/interim/kaggle -m "Updated data"
+    rm -rf data/interim/kaggle
 }
 
 start ()
