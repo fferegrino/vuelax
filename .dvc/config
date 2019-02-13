@@ -1,0 +1,4 @@
+['remote "local_remote"']
+url = /Users/antonioferegrino/remotes/vuelax
+[core]
+remote = local_remote
