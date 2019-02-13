@@ -22,6 +22,11 @@ setup ()
     fi
 }
 
+prepare_dvc ()
+{
+    $IN_PIPENV invoke prepare-kaggle-data --path data/raw --file vuelax.csv
+}
+
 upload_kaggle ()
 {
     mkdir data/interim/kaggle

@@ -114,7 +114,7 @@ def __upper_boolean(value):
 
 
 def load_training_data(drop_no_label=True):
-    offer_files = sorted(glob('data/offers-*.csv'))
+    offer_files = sorted(glob('data/raw/offers-*.csv'))
     headers = None
     records = []
     for offer_file in offer_files:

@@ -1,0 +1,6 @@
+md5: 917996e680d946ae4836f47b3d95b48d
+outs:
+- cache: true
+  md5: 74e6fe4af737cdba690f88126ef27a3b
+  metric: false
+  path: vuelax.csv
