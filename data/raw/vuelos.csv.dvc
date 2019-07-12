@@ -1,0 +1,8 @@
+md5: 3d9604c00373ab90fc789faa90691ab5
+wdir: ../..
+outs:
+- md5: 6e51ac30d26e6b1d28d44e6c3ebd294d
+  path: data/raw/vuelos.csv
+  cache: true
+  metric: false
+  persist: false
